@@ -1,0 +1,4 @@
+
+public enum Classificacao {
+	ARVORE,RETORNO,AVANCO,CRUZAMENTO,SEM_CLASSIFICACAO;
+}
