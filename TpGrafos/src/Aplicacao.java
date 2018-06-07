@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Scanner;
 
 public class Aplicacao {
 	
@@ -50,6 +51,8 @@ public class Aplicacao {
 	}
 
 	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int k=in.nextInt();
 		entradaDissimilaridade(args[1]);
 		entradaAlunos(args[0]);
 		grafo.adicionaArestas(matrizDissimilaridade);
@@ -58,7 +61,7 @@ public class Aplicacao {
 		//grafo.imprimeGrafo();
 		grafo.kruskal();
 		//grafo.imprimeGrafo();
-		grafo.divideGrafo(2);
+		grafo.divideGrafo(k);
 		grafo.imprimeGrafo();
 		grafo.separaGrupos();
 		grafo.ordenaGrupos();
