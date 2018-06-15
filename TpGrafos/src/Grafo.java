@@ -65,22 +65,18 @@ public class Grafo {
 	}
 	
 	public void classificaAresta(ArrayList<Aresta> la){
-		if(la.get(la.size()-1).getAdjacente1().getColorido()==Cor.BRANCO||la.get(la.size()-1).getAdjacente2().getColorido()==Cor.BRANCO){
-			la.get(la.size()-1).getAdjacente1().setColorido(Cor.CINZA);
-			la.get(la.size()-1).getAdjacente2().setColorido(Cor.CINZA);
-			la.get(la.size()-1).setClassificacao(Classificacao.ARVORE);
+		if(existeCaminho(la)){
+			la.get(la.size()-1).setClassificacao(Classificacao.RETORNO);
 		}
-		else if(la.get(la.size()-1).getAdjacente1().getColorido()==Cor.CINZA&&la.get(la.size()-1).getAdjacente2().getColorido()==Cor.CINZA){
-			if(existeCaminho(la)){
-				la.get(la.size()-1).setClassificacao(Classificacao.RETORNO);
-			}
-			else{
-				la.get(la.size()-1).setClassificacao(Classificacao.ARVORE);
-			}
+		else{
+			la.get(la.size()-1).setClassificacao(Classificacao.ARVORE);
 		}
 	}
 	
 	public boolean existeCaminho(ArrayList<Aresta> la){
+		for(Vertice v: listaVertices){
+			v.setColorido(Cor.BRANCO);
+		}
 		boolean flag = false;
 		Vertice inicio,fim,temp;
 		ArrayList<Vertice> stack = new ArrayList<Vertice>();
@@ -94,11 +90,10 @@ public class Grafo {
 				stack.add(a.getAdjacente1());
 			}
 		}
+		inicio.setColorido(Cor.PRETO);
 		while(!stack.isEmpty()){
 			temp=stack.remove(stack.size()-1);
-			if(temp.getColorido()==Cor.BRANCO){
-				temp.setColorido(Cor.CINZA);
-			}
+			temp.setColorido(Cor.PRETO);
 			for(Aresta a: la.subList(0, la.size()-1)){
 				if(flag==true) break;
 				if(a.getAdjacente1().equals(temp)){
@@ -108,6 +103,7 @@ public class Grafo {
 					else{
 						if(a.getAdjacente2().getColorido()==Cor.BRANCO){
 							stack.add(a.getAdjacente2());
+							a.getAdjacente2().setColorido(Cor.CINZA);
 						}
 					}
 				}
@@ -118,6 +114,7 @@ public class Grafo {
 					else{
 						if(a.getAdjacente1().getColorido()==Cor.BRANCO){
 							stack.add(a.getAdjacente1());
+							a.getAdjacente1().setColorido(Cor.CINZA);
 						}
 					}
 				}

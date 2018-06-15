@@ -52,6 +52,7 @@ public class Aplicacao {
 
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
+		System.out.println("Digite um número k de professores para a divisão dos alunos");
 		int k=in.nextInt();
 		entradaDissimilaridade(args[1]);
 		entradaAlunos(args[0]);
@@ -62,7 +63,7 @@ public class Aplicacao {
 		grafo.kruskal();
 		//grafo.imprimeGrafo();
 		grafo.divideGrafo(k);
-		grafo.imprimeGrafo();
+		//grafo.imprimeGrafo();
 		grafo.separaGrupos();
 		grafo.ordenaGrupos();
 		grafo.imprimeGrupos();
